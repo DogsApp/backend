@@ -20,8 +20,8 @@ public class UserController {
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
-    @GetMapping
-    public ResponseEntity<?> getUserById(@RequestBody UUID id) {
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable UUID id) {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
     @GetMapping
