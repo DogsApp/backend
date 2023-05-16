@@ -16,4 +16,5 @@ public interface DogRepository extends JpaRepository<DogEntity, UUID> {
     Optional<DogEntity> findDogEntityByName(String name);
     List<DogEntity> findAllByBreed(Breed breed);
     List<DogEntity> findAllByDogSize(DogSize size);
+    List<DogEntity> findAllByUserId(UUID userId);
 }

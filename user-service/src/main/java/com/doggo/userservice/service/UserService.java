@@ -10,6 +10,7 @@ public interface UserService {
     public UserDto registerUser(UserDto userDto);
     Optional<UserDto> getUserById(UUID id);
     Optional<UserDto> getUserByEmail(String email);
+    UserDto updateUser(UserDto userDto);
     List<UserEntity> getUsers();
     void deleteUser(UUID id);
     UserDto mapUserEntityToUserDto(UserEntity userEntity);

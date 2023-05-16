@@ -14,6 +14,8 @@ public interface DogService {
     void deleteDog(UUID id);
     Optional<DogDto> getDogById(UUID id);
     Optional<DogDto> getDogByName(String name);
+    List<DogDto> getAllDogsByUserId(UUID userId);
+    List<DogDto> getAllDogs();
     List<DogDto> getDogsByBreed(Breed breed);
     List<DogDto> getDogsBySize(DogSize size);
     DogDto mapDogEntityToDogDto(DogEntity entity);

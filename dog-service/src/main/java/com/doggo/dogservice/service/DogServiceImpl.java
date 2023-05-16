@@ -51,6 +51,22 @@ public class DogServiceImpl implements DogService{
     }
 
     @Override
+    public List<DogDto> getAllDogs() {
+        List<DogEntity> dogs = dogRepository.findAll();
+        return dogs.stream()
+                .map(this::mapDogEntityToDogDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DogDto> getAllDogsByUserId(UUID userId) {
+        List<DogEntity> dogs = dogRepository.findAllByUserId(userId);
+        return dogs.stream()
+                .map(this::mapDogEntityToDogDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<DogDto> getDogsByBreed(Breed breed) {
         List<DogEntity> dogs = dogRepository.findAllByBreed(breed);
         return dogs.stream()

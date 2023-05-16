@@ -52,7 +52,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.deleteById(id);
     }
 
-
+    @Override
+    public UserDto updateUser(UserDto userDto) {
+        UserEntity userEntity = mapUserDtoToUserEntity(userDto);
+        userRepository.save(userEntity);
+        return userDto;
+    }
     @Override
     public UserDto mapUserEntityToUserDto(UserEntity userEntity) {
         UserDto userDto = new UserDto();
