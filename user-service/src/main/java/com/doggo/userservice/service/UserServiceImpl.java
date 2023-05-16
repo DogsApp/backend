@@ -30,25 +30,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return mapUserEntityToUserDto(savedUserEntity);
     }
 
+    @Override
     public Optional<UserDto> getUserById(UUID id) {
         Optional<UserEntity> userEntity = userRepository.findById(id);
         return userEntity.map(this::mapUserEntityToUserDto);
     }
 
+    @Override
     public Optional<UserDto> getUserByEmail(String email) {
         Optional<UserEntity> userEntity = userRepository.findByEmail(email);
         return userEntity.map(this::mapUserEntityToUserDto);
     }
 
+    @Override
     public List<UserEntity> getUsers() {
         return userRepository.findAll();
     }
 
+    @Override
     public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
 
 
+    @Override
     public UserDto mapUserEntityToUserDto(UserEntity userEntity) {
         UserDto userDto = new UserDto();
         userDto.setUserId(userEntity.getUserId());
@@ -59,6 +64,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userDto;
     }
 
+    @Override
     public UserEntity mapUserDtoToUserEntity(UserDto userDto) {
         UserEntity userEntity = new UserEntity();
         if(userDto.getUserId() != null) {
