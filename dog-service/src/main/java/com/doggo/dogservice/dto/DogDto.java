@@ -2,7 +2,6 @@ package com.doggo.dogservice.dto;
 
 import com.doggo.dogservice.entity.Breed;
 import com.doggo.dogservice.entity.DogSize;
-import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
