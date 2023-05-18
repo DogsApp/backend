@@ -24,18 +24,18 @@ public class DogController {
         this.dogService = dogService;
     }
 
-    @PostMapping("/dog/add")
+    @PostMapping("/add")
     public ResponseEntity<?> addDog(@RequestBody DogDto dogDto) {
         dogService.addDog(dogDto);
         return new ResponseEntity<>("Dog added", HttpStatus.OK);
     }
-    @PostMapping("/dog/delete")
+    @PostMapping("/delete")
     public ResponseEntity<?> deleteDog(@RequestBody DogDto dogDto) {
         dogService.deleteDog(dogDto.getDogId());
         return new ResponseEntity<>("Dog deleted", HttpStatus.OK);
     }
 
-    @GetMapping("/dog/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getDogById(@PathVariable UUID id) {
         Optional<DogDto> dogDto = dogService.getDogById(id);
         if(dogDto.isPresent()) {
@@ -45,7 +45,7 @@ public class DogController {
         }
     }
 
-    @GetMapping("/dog/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<?> getDogByName(@PathVariable String name) {
         Optional<DogDto> dogDto = dogService.getDogByName(name);
         if(dogDto.isPresent()) {
@@ -55,7 +55,7 @@ public class DogController {
         }
     }
 
-    @GetMapping("/{breed}")
+    @GetMapping("/breed/{breed}")
     public ResponseEntity<?> getDogsByBreed(@PathVariable String breed) {
         return new ResponseEntity<>(dogService.getDogsByBreed(Breed.valueOf(breed)), HttpStatus.OK);
     }
@@ -65,12 +65,12 @@ public class DogController {
         return new ResponseEntity<>(dogService.getAllDogs(), HttpStatus.OK);
     }
 
-    @GetMapping("/{size}")
+    @GetMapping("/size/{size}")
     public ResponseEntity<?> getDogsBySize(@PathVariable String size) {
         return new ResponseEntity<>(dogService.getDogsBySize(DogSize.valueOf(size)), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<?> getAllDogsByUserId(@PathVariable UUID userId) {
         return new ResponseEntity<>(dogService.getAllDogsByUserId(userId), HttpStatus.OK);
     }

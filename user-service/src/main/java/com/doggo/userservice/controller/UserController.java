@@ -20,7 +20,7 @@ public class UserController {
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable UUID id) {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
@@ -34,12 +34,12 @@ public class UserController {
         return new ResponseEntity<>("User added", HttpStatus.OK);
     }
 
-    @PostMapping("/user/update")
+    @PostMapping("/update")
     public ResponseEntity<?> updateUser(@RequestBody UserDto userDto) {
         userService.updateUser(userDto);
         return new ResponseEntity<>("User updated", HttpStatus.OK);
     }
-    @PostMapping("/user/delete")
+    @PostMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestBody UUID id) {
         userService.deleteUser(id);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
