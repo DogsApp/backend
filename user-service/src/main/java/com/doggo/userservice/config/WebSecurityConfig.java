@@ -1,4 +1,4 @@
-package com.doggo.userservice.security;
+package com.doggo.userservice.config;
 
 
 import org.springframework.context.annotation.Bean;
