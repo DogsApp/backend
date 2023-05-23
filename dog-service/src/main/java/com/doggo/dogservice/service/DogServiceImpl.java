@@ -5,7 +5,10 @@ import com.doggo.dogservice.entity.Breed;
 import com.doggo.dogservice.entity.DogEntity;
 import com.doggo.dogservice.entity.DogSize;
 import com.doggo.dogservice.repository.DogRepository;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -24,11 +27,9 @@ public class DogServiceImpl implements DogService{
     }
 
 
-    @Override
-    public DogDto addDog(DogDto dogDto) {
-        DogEntity dogEntity = mapDogDtoToDogEntity(dogDto);
-        dogRepository.save(dogEntity);
-        return dogDto;
+    @KafkaListener(id = "groupId", topics = "user-topic", containerFactory = "factory")
+    public void addDog(ConsumerRecord<String, DogDto> cr, @Payload DogDto payload) {
+        dogRepository.save(mapDogDtoToDogEntity(payload));
     }
 
     @Override

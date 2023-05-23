@@ -24,11 +24,6 @@ public class DogController {
         this.dogService = dogService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addDog(@RequestBody DogDto dogDto) {
-        dogService.addDog(dogDto);
-        return new ResponseEntity<>("Dog added", HttpStatus.OK);
-    }
     @PostMapping("/delete")
     public ResponseEntity<?> deleteDog(@RequestBody DogDto dogDto) {
         dogService.deleteDog(dogDto.getDogId());

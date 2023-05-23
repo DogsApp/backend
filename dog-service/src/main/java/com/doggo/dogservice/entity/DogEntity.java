@@ -2,6 +2,8 @@ package com.doggo.dogservice.entity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @Builder
 public class DogEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID dogId = UUID.randomUUID();
     @Nonnull
     private UUID userId;
