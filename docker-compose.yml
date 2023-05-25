@@ -1,0 +1,76 @@
+version: "3"
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "22181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: dockerfile.user-service
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.datasource.url=${USER_SERVICE_DB_URL}
+      - spring.datasource.username=${USER_SERVICE_DB_USERNAME}
+      - spring.datasource.password=${USER_SERVICE_DB_PASSWORD}
+      - spring.datasource.driverClassName=org.postgresql.Driver
+      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+      - server.port=8080
+      - spring.kafka.bootstrap-servers=kafka:9092
+      - spring.kafka.topic.name=user-topic
+    depends_on:
+      - user-service-db
+
+  user-service-db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=${USER_SERVICE_DB_NAME}
+      - POSTGRES_USER=${USER_SERVICE_DB_USERNAME}
+      - POSTGRES_PASSWORD=${USER_SERVICE_DB_PASSWORD}
+    restart: always
+
+  dog-service:
+    build:
+      context: ./dog-service
+      dockerfile: dockerfile.dog-service
+    ports:
+      - "8081:8081"
+    environment:
+      - spring.datasource.url=${DOG_SERVICE_DB_URL}
+      - spring.datasource.username=${DOG_SERVICE_DB_USERNAME}
+      - spring.datasource.password=${DOG_SERVICE_DB_PASSWORD}
+      - spring.datasource.driverClassName=org.postgresql.Driver
+      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+      - server.port=8081
+      - spring.kafka.bootstrap-servers=kafka:9092
+      - spring.kafka.topic.name=user-topic
+    depends_on:
+      - dog-service-db
+
+  dog-service-db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=${DOG_SERVICE_DB_NAME}
+      - POSTGRES_USER=${DOG_SERVICE_DB_USERNAME}
+      - POSTGRES_PASSWORD=${DOG_SERVICE_DB_PASSWORD}
+    restart: always
