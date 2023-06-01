@@ -11,7 +11,6 @@ public class DogDtoDeserializer implements Deserializer<DogDto> {
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        // Nie wymaga dodatkowej konfiguracji, można to pozostawić puste
     }
 
     @Override
@@ -25,6 +24,5 @@ public class DogDtoDeserializer implements Deserializer<DogDto> {
 
     @Override
     public void close() {
-        // Nie wymaga zamykania żadnych zasobów, można to pozostawić puste
     }
 }

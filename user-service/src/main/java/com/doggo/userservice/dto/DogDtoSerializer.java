@@ -3,7 +3,6 @@ package com.doggo.userservice.dto;
 import org.apache.kafka.common.serialization.Serializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Map;
 
 public class DogDtoSerializer implements Serializer<DogDto> {
 
