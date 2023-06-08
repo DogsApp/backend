@@ -34,7 +34,7 @@ public class DogServiceImpl implements DogService{
 
     @Override
     public void deleteDog(UUID id) {
-        DogEntity dogEntity = dogRepository.findById(id).get();
+        DogEntity dogEntity = dogRepository.getReferenceById(id);
         dogRepository.delete(dogEntity);
     }
 

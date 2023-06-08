@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,10 +25,12 @@ public class UserController {
 
     @PostMapping("/add-dog")
     public ResponseEntity<?> publishDog() throws JsonProcessingException {
+        System.out.println("dupa");
         DogDto dogDto = new DogDto();
         dogDto.setAge(1);
         dogDto.setName("Luna");
         dogDto.setUserId(UUID.randomUUID());
+        System.out.println(dogDto);
         return new ResponseEntity<>(userService.sendMessage(dogDto), HttpStatus.OK);
     }
     @GetMapping("/{id}")

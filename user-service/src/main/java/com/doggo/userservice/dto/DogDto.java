@@ -20,4 +20,15 @@ public class DogDto implements Serializable {
     private String description;
     private String imageUrl;
 
+    @Override
+    public String toString() {
+        return "DogDto{" +
+                "dogId=" + dogId +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", description='" + description + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }
