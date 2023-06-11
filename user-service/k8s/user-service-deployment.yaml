@@ -17,6 +17,9 @@ spec:
           image: user_service:user
           ports:
             - containerPort: 8080
+          env:
+            - name: KAFKA_BROKER
+              value: kafka-service:9092
           envFrom:
             - configMapRef:
                 name: db-secret-credentials
