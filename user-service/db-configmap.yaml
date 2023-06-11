@@ -10,6 +10,6 @@ data:
   # User DB
   POSTGRES_DB: testDB
   # Db user
-  POSTGRES_USER: testUser
+  POSTGRES_USER: ${DB_USERNAME}
   # Db password
-  POSTGRES_PASSWORD: testPassword
+  POSTGRES_PASSWORD: ${DB_PASSWORD}
