@@ -17,29 +17,6 @@ spec:
           image: user_service:user
           ports:
             - containerPort: 8080
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: ${USER_DB_URL}
-            - name: SPRING_DATASOURCE_USERNAME
-              value: ${DB_USERNAME}
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: ${DB_PASSWORD}
-            - name: SPRING_JPA_SHOW_SQL
-              value: "true"
-            - name: SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL
-              value: "true"
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: user-service-service
-spec:
-  selector:
-    app: user-service
-  type: NodePort
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
+          envFrom:
+            - configMapRef:
+                name: db-secret-credentials
