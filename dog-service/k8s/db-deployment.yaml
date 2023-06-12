@@ -25,7 +25,7 @@ spec:
           image: postgres
           ports:
             # Assign ports to expose container
-            - containerPort: 5433
+            - containerPort: 5432
           envFrom:
             # Load the environment variables/PostgresSQL credentials
             - configMapRef:
@@ -34,10 +34,10 @@ spec:
           volumeMounts:
             # The volume mounts  for the container
             - mountPath: /var/lib/postgres/data
-              name: db-data
+              name: db-data2
       # Volumes attached to the pod
       volumes:
-        - name: db-data
+        - name: db-data2
           persistentVolumeClaim:
             # reference the PersistentVolumeClaim
             claimName: db-persistent-volume-claim2

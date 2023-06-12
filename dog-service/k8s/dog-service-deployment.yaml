@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dog-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dog-service
+  template:
+    metadata:
+      labels:
+        app: dog-service
+    spec:
+      containers:
+        - name: dog-service
+          image: dog_service:dog
+          ports:
+            - containerPort: 8081
+          env:
+            - name: KAFKA_BROKER
+              value: kafka-service:9092
+          envFrom:
+            - configMapRef:
+                name: db-secret-credentials2

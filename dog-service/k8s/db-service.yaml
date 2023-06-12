@@ -11,7 +11,7 @@ spec:
   type: NodePort
   ports:
     # The port number to expose the service
-    - port: 5433
+    - port: 5432
   # Pod to route service traffic
   selector:
     app: postgresdb2
