@@ -23,6 +23,11 @@ public class UserController {
         this.userService = userService;
     }
 
+
+    @GetMapping("/test")
+    public ResponseEntity<?> test() {
+        return new ResponseEntity<>("dupa", HttpStatus.OK);
+    }
     @PostMapping("/add-dog")
     public ResponseEntity<?> publishDog() throws JsonProcessingException {
         System.out.println("dupa");
