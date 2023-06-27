@@ -17,4 +17,21 @@ public class UserDto {
     private String password;
     private String email;
     private String location;
+
+    public UserDto(UUID userId, String username, String password) {
+        this.userId = userId;
+        this.name = username;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

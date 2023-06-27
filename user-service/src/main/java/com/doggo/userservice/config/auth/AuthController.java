@@ -121,7 +121,6 @@ public class AuthController {
 
         System.out.println("5");
         user.setRoles(roles);
-        System.out.println(user.toString());
         userRepository.save(user);
 
         System.out.println("6");
