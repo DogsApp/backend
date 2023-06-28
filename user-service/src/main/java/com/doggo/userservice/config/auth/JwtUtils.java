@@ -4,31 +4,22 @@ import java.security.Key;
 import java.util.Date;
 
 import com.doggo.userservice.config.auth.services.UserDetailsImpl;
+import io.jsonwebtoken.io.Decoders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-
-import java.security.Key;
-import java.util.Date;
-
-import com.doggo.userservice.config.auth.services.UserDetailsImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+
+    @Value("${bezkoder.app.jwtSecret}")
+    private String jwtSecret;
+
     @Value("${bezkoder.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
@@ -45,7 +36,7 @@ public class JwtUtils {
     }
 
     private Key key() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     public String getUserNameFromJwtToken(String token) {

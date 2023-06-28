@@ -30,9 +30,12 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        System.out.println(request.getHeader("Authorization"));
         try {
             String jwt = parseJwt(request);
+            System.out.println("dupa   " + jwt);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+                System.out.println("dupa2   " + jwt);
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
