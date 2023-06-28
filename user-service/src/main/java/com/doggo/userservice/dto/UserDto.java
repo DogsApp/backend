@@ -12,13 +12,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class UserDto {
-    private UUID userId;
+    private Long userId;
     private String name;
     private String password;
     private String email;
     private String location;
 
-    public UserDto(UUID userId, String username, String password) {
+    public UserDto(Long userId, String username, String password) {
         this.userId = userId;
         this.name = username;
         this.password = password;

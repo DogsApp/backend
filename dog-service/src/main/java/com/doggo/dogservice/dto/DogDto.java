@@ -14,10 +14,10 @@ import java.util.UUID;
 @Data
 public class DogDto {
     private UUID dogId;
-    private UUID userId;
+    private Long userId;
     private String name;
-    private Breed breed;
-    private DogSize dogSize;
+    private String breed;
+    private String size;
     private int age;
     private String description;
     private String imageUrl;

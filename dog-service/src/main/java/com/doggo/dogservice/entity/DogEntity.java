@@ -20,11 +20,11 @@ public class DogEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID dogId = UUID.randomUUID();
     @Nonnull
-    private UUID userId;
+    private Long userId;
     @Nonnull
     private String name;
-    private Breed breed;
-    private DogSize dogSize;
+    private String breed;
+    private String dogSize;
     private int age;
     private String description;
     private String imageUrl;

@@ -13,9 +13,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 public class DogDto implements Serializable {
-    private UUID dogId;
-    private UUID userId;
+    private Long userId;
     private String name;
+    private String breed;
+    private String size;
     private int age;
     private String description;
     private String imageUrl;
@@ -23,9 +24,10 @@ public class DogDto implements Serializable {
     @Override
     public String toString() {
         return "DogDto{" +
-                "dogId=" + dogId +
                 ", userId=" + userId +
                 ", name='" + name + '\'' +
+                ", breed='" + breed + '\'' +
+                ", size='" + size + '\'' +
                 ", age=" + age +
                 ", description='" + description + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
