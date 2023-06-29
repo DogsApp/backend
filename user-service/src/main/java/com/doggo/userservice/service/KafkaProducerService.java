@@ -1,4 +1,4 @@
-package com.doggo.userservice.config;
+package com.doggo.userservice.service;
 
 import com.doggo.userservice.dto.DogDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,11 +6,11 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Producer {
+public class KafkaProducerService {
     private final KafkaTemplate<Object, Object> kafkaTemplate;
 
     @Autowired
-    public Producer(KafkaTemplate<Object, Object> kafkaTemplate) {
+    public KafkaProducerService(KafkaTemplate<Object, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
